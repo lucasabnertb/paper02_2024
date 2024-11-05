@@ -1,0 +1,9 @@
+streamlit
+pandas
+sqlalchemy
+os
+dotenv 
+streamlit_extras.metric_cards
+streamlit_extras.grid 
+streamlit_extras.tags 
+openai
