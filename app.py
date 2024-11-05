@@ -17,7 +17,7 @@ import openai
 load_dotenv()
 
 # Define a página para usar a largura total
-st.set_page_config(layout="wide", title="Paper")
+st.set_page_config(layout="wide")
 
 # Configurações do banco de dados a partir das variáveis de ambiente
 user = os.getenv('DB_USER')
@@ -65,22 +65,30 @@ st.markdown(
 # Função para plotar o gráfico de barras com Plotly
 
 
+# Exemplo de função substituída usando st.bar_chart
+# Função para plotar o gráfico com rótulos usando Plotly
 def plotar_grafico_media_publico():
-    # Formata os rótulos para exibir como inteiros
+    # Converte os dados para o formato adequado para exibir rótulos
     rótulos_formatados = df_publico['media_de_publico'].astype(int).astype(str)
     
-    fig = px.bar(df_publico, x='ano_campeonato', y='media_de_publico', 
-                 title='Média de Público por Ano', 
-                 color_discrete_sequence=['#F7B401'])  # Define a cor das barras
+    # Configura o gráfico com Plotly Express
+    fig = px.bar(
+        df_publico, 
+        x='ano_campeonato', 
+        y='media_de_publico', 
+        title='Média de Público por Ano',
+        color_discrete_sequence=['#F7B401']
+    )
     
     # Adiciona rótulos de dados formatados
     fig.update_traces(text=rótulos_formatados, textposition='auto')
     
-    # Atualiza os eixos
+    # Ajusta os rótulos dos eixos
     fig.update_layout(xaxis_title="Ano do Campeonato", yaxis_title="Média de Público")
     
-    # Plota o gráfico
+    # Exibe o gráfico no Streamlit
     st.plotly_chart(fig, use_container_width=True)
+
 
 # Configura sua chave da API
 openai.api_key = os.getenv('OPENAI_API_KEY')
