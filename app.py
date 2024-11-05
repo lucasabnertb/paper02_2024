@@ -66,29 +66,15 @@ st.markdown(
 
 
 # Exemplo de função substituída usando st.bar_chart
-# Função para plotar o gráfico com rótulos usando Plotly
 def plotar_grafico_media_publico():
-    # Converte os dados para o formato adequado para exibir rótulos
-    rótulos_formatados = df_publico['media_de_publico'].astype(int).astype(str)
+    # Preparar os dados
+    df_publico['media_de_publico'] = df_publico['media_de_publico'].astype(int)
     
-    # Configura o gráfico com Plotly Express
-    fig = px.bar(
-        df_publico, 
-        x='ano_campeonato', 
-        y='media_de_publico', 
-        title='Média de Público por Ano',
-        color_discrete_sequence=['#F7B401']
-    )
-    
-    # Adiciona rótulos de dados formatados
-    fig.update_traces(text=rótulos_formatados, textposition='auto')
-    
-    # Ajusta os rótulos dos eixos
-    fig.update_layout(xaxis_title="Ano do Campeonato", yaxis_title="Média de Público")
-    
-    # Exibe o gráfico no Streamlit
-    st.plotly_chart(fig, use_container_width=True)
+    # Define o título
+    st.subheader("Média de Público por Ano")
 
+    # Cria o gráfico de barras
+    st.bar_chart(data=df_publico.set_index('ano_campeonato')['media_de_publico'])
 
 # Configura sua chave da API
 openai.api_key = os.getenv('OPENAI_API_KEY')
