@@ -1,12 +1,9 @@
 from functions import *
 import streamlit as st
 import pandas as pd
-import numpy as np
-import plotly.express as px
 from sqlalchemy import create_engine
 import os
 from dotenv import load_dotenv
-import datetime
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_extras.grid import grid
 from streamlit_extras.tags import tagger_component
